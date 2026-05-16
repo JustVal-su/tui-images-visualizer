@@ -5,7 +5,7 @@ Todo list :
 - [ ] handle errors when there are different line width
 - [ ] support transparent pixels
 - [ ] make code cleaner
-- [ ] make possible to import any compatible jspn file with a cli arument
+- [ ] make possible to import any compatible json file with a cli argument
 - [ ] make a tiny pixel art editor to stop having to place all the pixels manually
 
 
