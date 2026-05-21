@@ -5,15 +5,17 @@ use serde::Deserialize;
 
 
 //Todo list :
-//make sure it works with impair values
 //handle errors when there are different line width -> partially handled but it would be better if all lines with wrong width are displayed at once
 //support transparent pixels
 //make code cleaner
-//make possible to import any compatible json file with a cli argument
+//make possible to import any compatible json file with a cli argument and add an argument to dismiss the warning specified on line 13
 //make a tiny pixel art editor to stop having to place all the pixels manually
 //display warning when specified height isn't equal to the true height
 //fix bug : when a height is specified (and is odd), if there is another line in the file, it is displayed where it shouldn't be
 //handle "thread 'main' panicked at src/main.rs:28:26:  index out of bounds: the len is 17 but the index is 17  note: run with `RUST_BACKTRACE=1` environment variable to display a backtrace   when specified height isn't equal to real one"
+
+//Done :
+//make sure it works with impair values
 
 // Importing the object that will be used to display the image
 #[derive(Debug, Deserialize)]
@@ -83,7 +85,7 @@ fn display(parsed_file: Image) {
                 "▀".truecolor(pixel[0], pixel[1], pixel[2])
             );
         }
-                
+        print!("\n");       
     }
 }
 
