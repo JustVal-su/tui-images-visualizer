@@ -2,10 +2,10 @@ use colored::*;
 use std::env;
 use std::fs;
 use serde::Deserialize;
+use suprint_rs::suprint_return;
 
 
 //Todo list :
-//handle errors when there are different line width -> partially handled but it would be better if all lines with wrong width are displayed at once
 //support transparent pixels
 //make code cleaner
 //make possible to import any compatible json file with a cli argument and add an argument to dismiss the warning specified on line 13
@@ -16,6 +16,7 @@ use serde::Deserialize;
 
 //Done :
 //make sure it works with impair values
+//handle errors when there are different line width
 
 // Importing the object that will be used to display the image
 #[derive(Debug, Deserialize)]
@@ -27,17 +28,30 @@ struct Image {
 }
 
 fn check(image: &Vec<Vec<[u8; 3]>>, height: u32, width: u32) -> bool {
+    let mut line_wrong_width = vec![];
     for i in 0..height {
         let line = &image[i as usize];
         if line.len() != (width as usize) {
-            let message = format!("Line {} isn't equal to the specified line width.", i + 1);
-            println!(
-                "{}",
-                message.truecolor(183, 65, 14)
-            );
-            return false;
+            line_wrong_width.push(i + 1);
         }
     } 
+    if !line_wrong_width.is_empty() {
+        let mut lines_str = String::from("");
+        for i in 0..line_wrong_width.len() {
+            if (i + 1) == line_wrong_width.len() {
+                lines_str.push_str(&format!("{}", line_wrong_width[i]));
+            } else {
+                lines_str.push_str(&format!("{}, ", line_wrong_width[i]));
+            }
+        }
+        let message = format!("The following lines width aren't equal to one specified in the width field of the provided file : {}.", lines_str);
+        let text_lines = suprint_return(message);
+        for i in 0..text_lines.len() { // rendering the colored text line by line
+            let usize_i: usize = i as usize;
+            println!("{}", text_lines[usize_i].truecolor(183, 65, 14));
+        }
+        return false;
+    }
     true
 }
 
@@ -100,7 +114,7 @@ fn main() {
     if width_check == true {
         display(parsed_file);
     } else {
-        println!("Operation aborted. Please fix the specified line width and retry.");
+        println!("Operation aborted. Please fix the specified line width(s) and retry.");
     }
 
 }

@@ -2,7 +2,7 @@ Visualize images in an ansi terminal with this tool !
 
 Todo list :
 - [X] make sure it works with impair values
-- [ ] handle errors when there are different line width -> partially handled but it would be better if all lines with wrong width are displayed at once
+- [X] handle errors when there are different line width -> partially handled but it would be better if all lines with wrong width are displayed at once
 - [ ] support transparent pixels
 - [ ] make code cleaner
 - [ ] display warning when specified height isn't equal to the true height
@@ -13,7 +13,7 @@ Todo list :
 
 
 ## Example with a smiley image :
-![smiley image](https://github.com/JustVal-su/tui-images-visualizer/blob/main/Capture%20d%E2%80%99%C3%A9cran%20du%202026-05-15%2013-18-02.png)
+![smiley image](./smiley.png)
 
 
 ## Json file requirement
